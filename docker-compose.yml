@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  patientcare_api:
+    build:
+      context: .
+    container_name: patientcare_api
+    ports:
+      - "5003:5003"
+    networks:
+      - monitoring_network
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+
+networks:
+  monitoring_network:
+    external: true
