@@ -1,17 +1,18 @@
-version: '3.8'
+﻿version: '3.8'
 
 services:
   patientcare_api:
     build:
       context: .
+      dockerfile: PatientCare.API/Dockerfile
     container_name: patientcare_api
     ports:
-      - "5003:5003"
+      - "5003:80"  # 🔹 Porta exposta corretamente
     networks:
-      - monitoring_network
+      - monitoring_network  # 🔹 Compartilha a mesma redes
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
 
 networks:
   monitoring_network:
-    external: true
+    external: true  # 🔹 Garante que todas as APIs se comuniquem
