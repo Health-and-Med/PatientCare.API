@@ -1,12 +1,88 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Users\\Matheus\\Documents\\FIAP\\HACKATON\\PatientCare.API\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{9424C95A-4BFD-4FE8-A70B-D87A1437E611}|PatientCare.API\\PatientCare.API.csproj|c:\\users\\matheus\\documents\\fiap\\hackaton\\patientcare.api\\patientcare.api\\appsettings.production.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{9424C95A-4BFD-4FE8-A70B-D87A1437E611}|PatientCare.API\\PatientCare.API.csproj|solutionrelative:patientcare.api\\appsettings.production.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9424C95A-4BFD-4FE8-A70B-D87A1437E611}|PatientCare.API\\PatientCare.API.csproj|c:\\users\\matheus\\documents\\fiap\\hackaton\\patientcare.api\\patientcare.api\\dockerfile||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{9424C95A-4BFD-4FE8-A70B-D87A1437E611}|PatientCare.API\\PatientCare.API.csproj|solutionrelative:patientcare.api\\dockerfile||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9424C95A-4BFD-4FE8-A70B-D87A1437E611}|PatientCare.API\\PatientCare.API.csproj|c:\\users\\matheus\\documents\\fiap\\hackaton\\patientcare.api\\patientcare.api\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{9424C95A-4BFD-4FE8-A70B-D87A1437E611}|PatientCare.API\\PatientCare.API.csproj|solutionrelative:patientcare.api\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9424C95A-4BFD-4FE8-A70B-D87A1437E611}|PatientCare.API\\PatientCare.API.csproj|c:\\users\\matheus\\documents\\fiap\\hackaton\\patientcare.api\\patientcare.api\\controllers\\patientscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9424C95A-4BFD-4FE8-A70B-D87A1437E611}|PatientCare.API\\PatientCare.API.csproj|solutionrelative:patientcare.api\\controllers\\patientscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
       "VerticalTabListWidth": 256,
-      "DocumentGroups": []
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 2,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Dockerfile",
+              "DocumentMoniker": "C:\\Users\\Matheus\\Documents\\FIAP\\HACKATON\\PatientCare.API\\PatientCare.API\\Dockerfile",
+              "RelativeDocumentMoniker": "PatientCare.API\\Dockerfile",
+              "ToolTip": "C:\\Users\\Matheus\\Documents\\FIAP\\HACKATON\\PatientCare.API\\PatientCare.API\\Dockerfile",
+              "RelativeToolTip": "PatientCare.API\\Dockerfile",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-02-08T16:50:31.309Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "appsettings.Development.json",
+              "DocumentMoniker": "C:\\Users\\Matheus\\Documents\\FIAP\\HACKATON\\PatientCare.API\\PatientCare.API\\appsettings.Development.json",
+              "RelativeDocumentMoniker": "PatientCare.API\\appsettings.Development.json",
+              "ToolTip": "C:\\Users\\Matheus\\Documents\\FIAP\\HACKATON\\PatientCare.API\\PatientCare.API\\appsettings.Development.json",
+              "RelativeToolTip": "PatientCare.API\\appsettings.Development.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-02-08T16:50:07.531Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "appsettings.Production.json",
+              "DocumentMoniker": "C:\\Users\\Matheus\\Documents\\FIAP\\HACKATON\\PatientCare.API\\PatientCare.API\\appsettings.Production.json",
+              "RelativeDocumentMoniker": "PatientCare.API\\appsettings.Production.json",
+              "ToolTip": "C:\\Users\\Matheus\\Documents\\FIAP\\HACKATON\\PatientCare.API\\PatientCare.API\\appsettings.Production.json",
+              "RelativeToolTip": "PatientCare.API\\appsettings.Production.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-02-08T16:50:05.434Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "PatientsController.cs",
+              "DocumentMoniker": "C:\\Users\\Matheus\\Documents\\FIAP\\HACKATON\\PatientCare.API\\PatientCare.API\\Controllers\\PatientsController.cs",
+              "RelativeDocumentMoniker": "PatientCare.API\\Controllers\\PatientsController.cs",
+              "ToolTip": "C:\\Users\\Matheus\\Documents\\FIAP\\HACKATON\\PatientCare.API\\PatientCare.API\\Controllers\\PatientsController.cs",
+              "RelativeToolTip": "PatientCare.API\\Controllers\\PatientsController.cs",
+              "ViewState": "AgIAAIsAAAAAAAAAAAAcwIkAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-08T13:37:16.169Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
     }
   ]
 }

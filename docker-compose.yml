@@ -11,7 +11,7 @@ services:
     networks:
       - monitoring_network  # 🔹 Compartilha a mesma redes
     environment:
-      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_ENVIRONMENT=Production
 
 networks:
   monitoring_network:
