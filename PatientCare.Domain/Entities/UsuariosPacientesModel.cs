@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace PatientCare.Domain.Entities
 {
-    public class LoginModel
+    public class UsuariosPacientesModel
     {
-        public string? Email { get; set; }
-
-        public string? Cpf {  get; set; }
-        public string Password { get; set; }
+        public int? Id { get; set; }
+        public int? PacienteId { get; set; }
+        public string SenhaHash;
     }
 }
+
 
