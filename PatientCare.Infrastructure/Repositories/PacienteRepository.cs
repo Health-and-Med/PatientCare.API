@@ -103,7 +103,32 @@ namespace MedControl.Infrastructure.Repositories
 
 
         }
+        public async Task<PacientesModel> GetUserByCpfAsync(string cpf)
+        {
+            try
+            {
+                using (var connection = new NpgsqlConnection(_connectionString)) // Cria uma nova conexão
+                {
+                    await connection.OpenAsync();
 
+                    var paciente = await connection.QueryFirstOrDefaultAsync<PacientesModel>("SELECT * FROM Pacientes WHERE CPF = @cpf", new { cpf });
+
+                    if (paciente == null)
+                        return null;
+                    paciente.Usuario = await _usuariosPacientesRepository.GetByIdAsync(paciente.Id.Value);
+
+                    return paciente;
+                }
+            }
+            catch (Exception e)
+            {
+
+                throw;
+            }
+
+
+
+        }
         public async Task UpdateAsync(RequestUpdatepacienteModel paciente, int pacienteId)
         {
             try

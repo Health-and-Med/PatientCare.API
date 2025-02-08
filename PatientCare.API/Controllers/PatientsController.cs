@@ -28,7 +28,11 @@ namespace PatientCare.API.Controllers
         {
             try
             {
-                var user = await _pacienteService.AuthenticateAsync(request.Email, request.Password);
+                if (request.Email == null && request.Cpf == null)
+                {
+                    return BadRequest("Preencha E-mail ou Cpf para autenticar!");
+                }
+                var user = await _pacienteService.AuthenticateAsync(request.Email,request.Cpf, request.Password);
                 if (user == null)
                     return Unauthorized();
 

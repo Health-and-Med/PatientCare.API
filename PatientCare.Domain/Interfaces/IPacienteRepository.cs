@@ -9,6 +9,8 @@ namespace MedControl.Infrastructure.Repositories
         Task<IEnumerable<PacientesModel>> GetAllAsync();
         Task<PacientesModel> GetByIdAsync(int id);
         Task<PacientesModel> GetUserByEmailAsync(string email);
+        Task<PacientesModel> GetUserByCpfAsync(string cpf);
+
         Task UpdateAsync(RequestUpdatepacienteModel paciente, int pacienteId);
     }
 }

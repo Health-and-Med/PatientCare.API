@@ -130,19 +130,24 @@ namespace PatientCare.Application.Services
             }
         }
 
-        public async Task<PacientesModel> AuthenticateAsync(string email, string password)
+        public async Task<PacientesModel> AuthenticateAsync(string email,string cpf, string password)
         {
             try
             {
-                if (string.IsNullOrEmpty(email))
-                    throw new ArgumentNullException("Email");
 
                 if (string.IsNullOrEmpty(password))
                     throw new ArgumentNullException("password");
 
+                PacientesModel paciente = new PacientesModel();
 
-                var paciente = await _pacienteRepository.GetUserByEmailAsync(email);
-
+                if(email== null)
+                {
+                     paciente = await _pacienteRepository.GetUserByCpfAsync(cpf);
+                }
+                else
+                {
+                     paciente = await _pacienteRepository.GetUserByEmailAsync(email);
+                }
                 if (paciente == null)
                     return null;
 
