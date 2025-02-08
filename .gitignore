@@ -64,3 +64,4 @@ Thumbs.db
 *.v2
 *.testlog
 *.manifest
+*.json
