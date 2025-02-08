@@ -3,90 +3,72 @@ using Dapper;
 using System.Data;
 using System.Security.Cryptography;
 using System.Text;
+using PatientCare.Domain.Entities;
+using MedControl.Infrastructure.Repositories;
 
 namespace PatientCare.Infrastructure.Repositories
 {
     public class DatabaseInitializer : IDatabaseInitializer
     {
         private readonly IDbConnection _dbConnection;
+        private readonly IPacienteRepository  _pacienteRepository;
+        private readonly IUsuariosPacientesService  _usuariosPacientesService;
 
-        public DatabaseInitializer(IDbConnection dbConnection)
+        public DatabaseInitializer(IDbConnection dbConnection, IPacienteRepository pacienteRepository, IUsuariosPacientesService usuariosPacientesService)
         {
             _dbConnection = dbConnection;
+            _pacienteRepository = pacienteRepository;
+            _usuariosPacientesService = usuariosPacientesService;
         }
 
-        public void Initialize()
+        public async Task InitializeAsync()
         {
-            var createUsersTableQuery = @"
-                CREATE TABLE IF NOT EXISTS Users (
+            var createPacientesTableQuery = @"
+                CREATE TABLE IF NOT EXISTS Pacientes (
                     Id SERIAL PRIMARY KEY,
-                    Username VARCHAR(50) NOT NULL,
+                    Nome VARCHAR(50) NOT NULL,
                     Cpf VARCHAR(50) NOT NULL,
-                    Crm VARCHAR(50),
-                    Email VARCHAR(255) NOT NULL,
-                    PasswordHash TEXT NOT NULL,
-                    Role VARCHAR(50)
+                    DataNascimento DATE NOT NULL,
+                    Email VARCHAR(255) NOT NULL
                 );
             ";
 
-            //var createRegionsTableQuery = @"
-            //    CREATE TABLE IF NOT EXISTS Regions (
-            //        DDD VARCHAR(3) PRIMARY KEY,
-            //        Name VARCHAR(100) NOT NULL
-            //    );
-            //";
+            var createUsuarioPacientesTableQuery = @"
+                CREATE TABLE IF NOT EXISTS UsuariosPacientes (
+                    Id SERIAL PRIMARY KEY,
+                    PacienteId INT NOT NULL,
+                    SenhaHash TEXT
+                );
+            ";
 
-            //var createContactsTableQuery = @"
-            //    CREATE TABLE IF NOT EXISTS Contacts (
-            //        Id SERIAL PRIMARY KEY,
-            //        Name VARCHAR(100) NOT NULL,
-            //        Phone VARCHAR(15) NOT NULL,
-            //        Email VARCHAR(100) NOT NULL,
-            //        DDD VARCHAR(3) NOT NULL,
-            //        CONSTRAINT fk_Contacts_Regions FOREIGN KEY (DDD) REFERENCES Regions(DDD)
-            //    );
-            //";
-
-            _dbConnection.Execute(createUsersTableQuery);
-            //_dbConnection.Execute(createRegionsTableQuery);
-            //_dbConnection.Execute(createContactsTableQuery);
+            _dbConnection.Execute(createPacientesTableQuery);
+            _dbConnection.Execute(createUsuarioPacientesTableQuery);
+            
 
             // Adicionar usuário admin se não existir
-            AddAdminUser();
+            await AddAdminUserAsync();
         }
 
-        private void AddAdminUser()
+        private async Task AddAdminUserAsync()
         {
-            var adminUsername = "admin";
-            var adminPassword = "123456";
-            var adminRole = "Admin";
-            var cpf = "00000000000";
-            var crm = "";
-            var email = "devs@email.com";
-
-            var checkAdminUserQuery = "SELECT COUNT(*) FROM Users WHERE Username = @Username";
-            var adminUserCount = _dbConnection.ExecuteScalar<int>(checkAdminUserQuery, new { Username = adminUsername });
-
-            if (adminUserCount == 0)
+            try
             {
-                var passwordHash = CreatePasswordHash(adminPassword);
-                var insertAdminUserQuery = @"
-            INSERT INTO Users (Username, Cpf, Crm, Email, PasswordHash, Role)
-            VALUES (@Username,@Cpf, @Crm, @Email, @PasswordHash, @Role);
-        ";
-
-                var adminUser = new
+                var checkAdminUserQuery = "SELECT COUNT(*) FROM Pacientes WHERE Email = @email";
+                var adminUserCount = _dbConnection.ExecuteScalar<int>(checkAdminUserQuery, new { email = "devs@email.com" });
+                RequestCreatePacientesModel pacientes = new RequestCreatePacientesModel {  Cpf = "00000000000", DataNascimento = new DateTime(1990,11,24), Email = "devs@email.com", Nome = "devs"};
+                if (adminUserCount == 0)
                 {
-                    Username = adminUsername,
-                    Cpf = cpf,
-                    Crm = crm,
-                    Email = email,
-                    PasswordHash = passwordHash,
-                    Role = adminRole
-                };
-
-                _dbConnection.Execute(insertAdminUserQuery, adminUser);
+                    var paciente = await _pacienteRepository.CreateAsync(pacientes);
+                    await _usuariosPacientesService.CreateAsync(new RequestCreateUsuarioPacienteModel { SenhaHash = CreatePasswordHash("123456") }, paciente.Id.Value);
+                    
+                }
             }
+            catch (Exception e)
+            {
+
+                throw;
+            }
+
         }
 
         private string CreatePasswordHash(string password)

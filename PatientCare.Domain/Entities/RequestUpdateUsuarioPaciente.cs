@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PatientCare.Domain.Interfaces
+namespace PatientCare.Domain.Entities
 {
-    public interface IDatabaseInitializer
+    public class RequestUpdateUsuarioPaciente
     {
-        Task InitializeAsync();
+        public string SenhaHash { get; set; }
     }
 }
-

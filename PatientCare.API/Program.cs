@@ -8,16 +8,27 @@ using Npgsql;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using System.Data;
 using System.Text;
+using MedControl.Infrastructure.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// 🔹 Configuração da string de conexão
+// 🔹 Configurar leitura de arquivos de configuração
+builder.Configuration
+    .SetBasePath(Directory.GetCurrentDirectory()) // Define o diretório base
+    .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true) // Carrega appsettings.json
+    .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", optional: true, reloadOnChange: true) // Carrega appsettings.Development.json em ambiente de dev
+    .AddEnvironmentVariables(); // Permite sobrescrever via variáveis de ambiente
+
+
+// 🔹 Configuração da string de conexão com PostgreSQL
 string connectionString = builder.Configuration.GetConnectionString("DefaultConnection")
     ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 
-builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IPacientesService, PacientesService>();
+builder.Services.AddScoped<IUsuariosPacientesService, UsuariosPacientesService>();
+builder.Services.AddScoped<IPacienteRepository, PacienteRepository>();
+builder.Services.AddScoped<IUsuariosPacientesRepository, UsuariosPacientesRepository>();
 builder.Services.AddScoped<IDatabaseInitializer, DatabaseInitializer>();
-builder.Services.AddScoped<IUserService, UserService>();
 
 // 🔹 Conexão com o banco de dados PostgreSQL
 builder.Services.AddScoped<IDbConnection>(sp => new NpgsqlConnection(connectionString));
@@ -75,7 +86,7 @@ var app = builder.Build();
 using (var scope = app.Services.CreateScope())
 {
     var dbInitializer = scope.ServiceProvider.GetRequiredService<IDatabaseInitializer>();
-    dbInitializer.Initialize();
+    dbInitializer.InitializeAsync();
 }
 
 // 🔹 Configuração do Swagger
